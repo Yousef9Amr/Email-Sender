@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
@@ -7,16 +8,17 @@ const app = express();
 // Serve static files (HTML, CSS)
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());  // Add this for JSON data
 
 // Email sending route
-app.post('/send-email', async (req, res) => {
+app.post('/api/send-email', async (req, res) => {
     const { emails, names, subject, body } = req.body;
+
+    console.log("Received data:", req.body);  // Debugging log
 
     // Split emails and names into arrays
     const recipientList = emails.split(',').map(email => email.trim());
     const firstNames = names.split(',').map(name => name.trim());
-    
-
 
     if (recipientList.length !== firstNames.length) {
         return res.status(400).send("Emails and names count do not match!");
@@ -26,8 +28,8 @@ app.post('/send-email', async (req, res) => {
     let transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'yousef9amr@gmail.com',  // Replace with your email
-            pass: 'vqgs jgpn aels krgj'  // Replace with your app-specific password
+            user: process.env.EMAIL,  // Use environment variables for security
+            pass: process.env.EMAIL_PASSWORD,  // Use environment variables for security
         }
     });
 
@@ -39,7 +41,7 @@ app.post('/send-email', async (req, res) => {
             const personalizedBody = `Dear Doctor ${firstName},\n\n${body}`;
 
             let mailOptions = {
-                from: 'yousef9amr@gmail.com',  // Replace with your email
+                from: process.env.EMAIL,  // Use environment variable
                 to: recipientEmail,
                 subject: subject,
                 text: personalizedBody
