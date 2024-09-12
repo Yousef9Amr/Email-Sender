@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color:  #dd0f0f;
     margin: 0;
     padding: 0;
     display: flex;
@@ -9,12 +9,77 @@ body {
     height: 100vh;
 }
 
+/* Style for the heading with shadow and floating effect */
+.heading {
+    font-size: 28px;
+    color: white;
+    margin: 0 auto 20px;      /* Center the heading and add margin at the bottom */
+    text-align: center;       /* Center the text inside the heading */
+    opacity: 0;
+    transform: translateX(-100px); /* Start from the left */
+    transition: all 0.5s ease;     /* Smooth transition */
+    line-height: 1.5;         /* Adjust line spacing */
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5); /* Shadow for floating effect */
+}
+
+/* Add floating animation */
+.heading.show {
+    opacity: 1;
+    transform: translateX(0);  /* Move to its final position */
+}
+
+/* Hover effect for more floating appearance */
+.heading:hover {
+    transform: translateY(-10px); /* Slight floating effect upwards */
+    text-shadow: 5px 5px 15px rgba(0, 0, 0, 0.7); /* Increase shadow on hover */
+}
+
+/* Initial state for the smooth appearance effect on page load */
+/* Initial state for the smooth appearance effect on page load */
 .container {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     width: 400px;
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    margin: 50px auto;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease; /* Transition for hover effect */
+    opacity: 0; /* Initially hidden */
+    transform: translateY(100px); /* Start below the viewport */
+    transition: all 1s ease-out; /* Smooth transition for position and opacity */
+}
+
+/* When the container is visible (triggered by JavaScript) */
+.container.show {
+    opacity: 1; /* Make it visible */
+    transform: translateY(0); /* Move to its final position */
+}
+
+/* Hover effect */
+.container:hover {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3); /* A shadow effect when hovered */
+    transform: translateY(-10px); /* Slight lift when hovered */
+}
+
+.logo-link {
+    display: inline-block;
+    text-align: center;
+}
+
+.logo {
+    width: 100px;
+    height: auto;
+    transition: transform 0.3s ease; /* Smooth transition effect */
+}
+
+/* Hover effect for the logo */
+.logo-link:hover .logo {
+    transform: scale(1.1); /* Enlarge the logo when hovered */
+}
+
+/* Optional: Change the cursor to indicate the logo is clickable */
+.logo-link:hover {
+    cursor: pointer;
 }
 
 h1 {
@@ -41,7 +106,7 @@ h1 {
 button {
     width: 100%;
     padding: 10px;
-    background-color: #28a745;
+    background-color: #922add;
     color: white;
     border: none;
     border-radius: 5px;
@@ -49,5 +114,18 @@ button {
 }
 
 button:hover {
-    background-color: #218838;
+    background-color: #4a1471;
 }
+
+footer {
+    text-align: center;       /* Center the text */
+    color: white;             /* Set the text color to white */
+    background-color: #333;   /* Set a dark background color for contrast */
+    padding: 20px;            /* Add some padding for spacing */
+    position: fixed;          /* Fix the footer at the bottom of the page */
+    width: 100%;              /* Ensure the footer spans the full width */
+    bottom: 0;                /* Position the footer at the very bottom */
+    font-style: italic;       /* Makes the text italic */
+    font-weight: bold;        /* Makes the text bold */
+}
+

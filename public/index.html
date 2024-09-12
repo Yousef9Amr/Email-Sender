@@ -3,11 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="\favicon.ico" type="image/x-icon">
     <title>Email Sender</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <h2 class="heading">
+        Welcome<br>
+        To The<br>
+        Automation<br>
+        Emailing System
+    </h2>
     <div class="container">
+        <a href="https://retailo.net/" target="_blank" class="logo-link">
+            <img src="Retailo.png" alt="Logo" class="logo">
+        </a>
         <h1>Email Sender</h1>
         <form id="email-form" action="/api/send-email" method="POST">
             <div class="form-group">
@@ -33,15 +43,18 @@
             <button type="submit">Send Emails</button>
         </form>
     </div>
+    <footer>
+        @All Rights Reserved to Yousef Zaghloul
+    </footer>
 
     <!-- JavaScript for handling form submission -->
     <script>
         const form = document.getElementById('email-form');
 
         form.addEventListener('submit', async (e) => {
-            e.preventDefault(); // Prevent the default form submission
+            e.preventDefault();  // Prevent the default form submission
 
-            // Get form data
+            // Get the form data
             const formData = new FormData(form);
             const data = {
                 emails: formData.get('emails'),
@@ -54,25 +67,31 @@
                 const response = await fetch('/api/send-email', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
                     },
                     body: JSON.stringify(data)
                 });
 
+                // Parse and handle the JSON response
                 const result = await response.json();
 
-                // Display success message
                 if (response.ok) {
-                    alert(result.message); // Show success message in alert box
+                    alert(result.message);  // Display success message
                 } else {
-                    alert('Failed to send emails: ' + result.error); // Show error message
+                    alert('Failed to send emails: ' + result.error);  // Display error message
                 }
-
             } catch (error) {
                 console.error('Error:', error);
                 alert('An error occurred while sending emails.');
             }
         });
     </script>
+    <script>
+        window.onload = function() {
+            document.querySelector('.container').classList.add('show'); // Add the 'show' class to start the animation
+            document.querySelector('.heading').classList.add('show'); // Add the 'show' class for the heading
+        };
+    </script>
+    
 </body>
 </html>

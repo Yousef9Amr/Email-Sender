@@ -21,7 +21,7 @@ app.post('/api/send-email', async (req, res) => {
     const firstNames = names.split(',').map(name => name.trim());
 
     if (recipientList.length !== firstNames.length) {
-        return res.status(400).send("Emails and names count do not match!");
+        return res.status(400).json({ error: "Emails and names count do not match!" });
     }
 
     // Nodemailer setup
@@ -51,11 +51,11 @@ app.post('/api/send-email', async (req, res) => {
             console.log(`Email sent to ${recipientEmail} with greeting: 'Dear Doctor ${firstName}'`);
         }
 
-        res.send("Emails sent successfully!");
+        res.json({ message: "Emails sent successfully!" });
 
     } catch (error) {
         console.error('Error sending emails:', error);
-        res.status(500).send("Failed to send emails.");
+        res.status(500).json({ error: "Failed to send emails." });
     }
 });
 
