@@ -9,30 +9,7 @@ body {
     height: 100vh;
 }
 
-/* Style for the heading with shadow and floating effect */
-.heading {
-    font-size: 28px;
-    color: white;
-    margin: 0 auto 20px;      /* Center the heading and add margin at the bottom */
-    text-align: center;       /* Center the text inside the heading */
-    opacity: 0;
-    transform: translateX(-100px); /* Start from the left */
-    transition: all 0.5s ease;     /* Smooth transition */
-    line-height: 1.5;         /* Adjust line spacing */
-    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5); /* Shadow for floating effect */
-}
 
-/* Add floating animation */
-.heading.show {
-    opacity: 1;
-    transform: translateX(0);  /* Move to its final position */
-}
-
-/* Hover effect for more floating appearance */
-.heading:hover {
-    transform: translateY(-10px); /* Slight floating effect upwards */
-    text-shadow: 5px 5px 15px rgba(0, 0, 0, 0.7); /* Increase shadow on hover */
-}
 
 /* Initial state for the smooth appearance effect on page load */
 /* Initial state for the smooth appearance effect on page load */
