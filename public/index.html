@@ -33,5 +33,46 @@
             <button type="submit">Send Emails</button>
         </form>
     </div>
+
+    <!-- JavaScript for handling form submission -->
+    <script>
+        const form = document.getElementById('email-form');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault(); // Prevent the default form submission
+
+            // Get form data
+            const formData = new FormData(form);
+            const data = {
+                emails: formData.get('emails'),
+                names: formData.get('names'),
+                subject: formData.get('subject'),
+                body: formData.get('body')
+            };
+
+            try {
+                const response = await fetch('/api/send-email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                // Display success message
+                if (response.ok) {
+                    alert(result.message); // Show success message in alert box
+                } else {
+                    alert('Failed to send emails: ' + result.error); // Show error message
+                }
+
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred while sending emails.');
+            }
+        });
+    </script>
 </body>
 </html>
